@@ -13,8 +13,21 @@ void parttrue_search(std::ifstream& file_stream, const std::string& sub_string)
 
             if (sub_string.size() < tmp.size())
             {
-                if (tmp.find(sub_string) == tmp.npos)
-                    difference = 0;
+                auto sub_string_iter = sub_string.begin();
+                auto tmp_iter = tmp.begin();
+                while (sub_string_iter != sub_string.end() && difference)
+                {
+                    if (*sub_string_iter != *tmp_iter)
+                    {
+                        difference--;
+                        tmp_iter++;
+                    }
+                    else
+                    {
+                        sub_string_iter++;
+                        tmp_iter++;
+                    }                    
+                }
             }
 
             if (sub_string.size() == tmp.size())
